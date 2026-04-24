@@ -61,7 +61,7 @@ npm run develop
 
 **Initial Exploration (1 hour):**
 - Access admin panel: `http://localhost:1337/admin`
-- Create first user account
+- Create first user account: scrtestingpurposes@gmail.com, Password1
 - Explore Settings → API Tokens (you'll need this later)
 - Check Database (SQLite default) in `.data` folder
 - Review project structure:
