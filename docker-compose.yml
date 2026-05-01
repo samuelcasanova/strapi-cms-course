@@ -1,0 +1,17 @@
+services:
+  strapi:
+    image: node:20-alpine
+    working_dir: /srv/app
+    command: sh -c "npm install && npm run develop"
+    env_file:
+      - ./strapi-ecommerce-api/.env
+    environment:
+      NODE_ENV: development
+    ports:
+      - "1337:1337"
+    volumes:
+      - ./strapi-ecommerce-api:/srv/app
+      - docker_node_modules:/srv/app/node_modules
+
+volumes:
+  docker_node_modules:

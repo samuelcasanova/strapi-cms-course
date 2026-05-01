@@ -212,12 +212,12 @@ curl "http://localhost:1337/api/products/1?populate=*"
 **Exercise: Build a Postman Collection**
 
 Create a collection with these requests:
-- [ ] Get all products (paginated)
-- [ ] Get products filtered by price range
-- [ ] Get products with categories populated
-- [ ] Get products filtered by category slug
-- [ ] Get a single product with all relations
-- [ ] Get products sorted by popularity (most recent)
+- [ ] Get all products (paginated) --> curl -g "http://localhost:1337/api/products?pagination[pageSize]=10&pagination[page]=1"  
+- [ ] Get products filtered by price range --> IMPOSSIBLE as Strapi doesn't allow to filter by fields inside a JSON
+- [ ] Get products with categories populated --> curl -g "http://localhost:1337/api/products?populate=category" 
+- [ ] Get products filtered by category slug --> curl -g "http://localhost:1337/api/products?filters[category][title][$eq]=Dairy" 
+- [ ] Get a single product with all relations --> curl "http://localhost:1337/api/products/ipzi4ihpu8tswiosmehyfvtg?populate=*" 
+- [ ] Get products sorted by popularity (most recent) --> curl -g "http://localhost:1337/api/products?sort=stock:desc,name:asc"
 
 **Deliverable:** Postman collection with 6+ tested API requests
 
@@ -241,6 +241,8 @@ Create 3 realistic e-commerce queries:
 1. Admin dashboard: all products with low stock
 2. Frontend: featured products in a category
 3. Search: text search with filters
+
+curl -g "http://localhost:1337/api/products?filters[state][\$eq]=active&filters[stock][\$gte]=1&sort=createdAt:desc&populate=cover&pagination[pageSize]=10"
 
 ### Week 4: Authentication & Permissions
 
