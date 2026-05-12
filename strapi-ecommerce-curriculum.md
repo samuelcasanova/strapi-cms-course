@@ -265,8 +265,7 @@ Admin Panel → Settings → API Tokens → Create new
 
 Use in requests:
 ```bash
-curl -H "Authorization: Bearer YOUR_TOKEN" \
-  http://localhost:1337/api/products
+curl -H "Authorization: Bearer d5e92d333ae36a439c361bfcf993368aff64...fe0ebc92deb8059cf3385f64bacf484be3a" http://localhost:1337/api/products
 ```
 
 #### 4.2 Role-Based Access Control (2-3 hours)
@@ -290,12 +289,18 @@ curl -H "Authorization: Bearer YOUR_TOKEN" \
 - Configure each role
 - Test with/without API token
 
+Created 3 new users:
+public@gmail.com, Pass1234
+auth@gmail.com, Pass1234
+product@gmail.com, Pass1234
+
+
 **Test Scenarios:**
-- [ ] Public can see active products
-- [ ] Public can't update products
-- [ ] Authenticated with token can create
-- [ ] Product Manager can do everything
-- [ ] Customer role restricted properly
+- [X] Public can see active products
+- [X] Public can't update products
+- [X] Authenticated with token can create
+- [X] Product Manager can do everything
+- [X] Customer role restricted properly
 
 **Deliverable:** 
 - 3 configured roles with documented permissions
@@ -342,7 +347,7 @@ Add to Product:
 - Query: Get T-Shirt with all variants
 
 ```bash
-curl "http://localhost:1337/api/products?filters[slug][$eq]=t-shirt&populate=variants"
+curl -g "http://localhost:1337/api/products?filters[productId][\$eq]=drunk-guy-t-shirt&populate=variants" 
 ```
 
 #### 5.2 Dynamic Pricing & Promotions (2-3 hours)
@@ -367,6 +372,11 @@ Add to Product:
 - Apply to products
 - Query for active promotions
 
+```bash
+curl -g "http://localhost:1337/api/promotions?filters[isActive][\$eq]=true" 
+```
+
+
 #### 5.3 Inventory & Stock Tracking (2-3 hours)
 
 **Create Content Type: StockLevel**
@@ -375,7 +385,6 @@ Add to Product:
 - `warehouse` (Text: main, backup)
 - `lastRestockDate` (DateTime)
 - `reorderPoint` (Integer)
-- `isLowStock` (Boolean, computed)
 
 **Advanced: Inventory Webhook**
 

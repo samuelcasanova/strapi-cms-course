@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "promotions",
+  "info": {
+    "singularName": "promotion",
+    "pluralName": "promotions",
+    "displayName": "Promotion"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "promotionId": {
+      "type": "string",
+      "unique": true
+    },
+    "Type": {
+      "type": "enumeration",
+      "enum": [
+        "Percentage",
+        "Fixed",
+        "buyXgetY"
+      ]
+    },
+    "value": {
+      "type": "decimal"
+    },
+    "startDate": {
+      "type": "datetime"
+    },
+    "endDate": {
+      "type": "datetime"
+    },
+    "applicableProducts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "inversedBy": "promotions"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

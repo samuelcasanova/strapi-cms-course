@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "stock_levels",
+  "info": {
+    "singularName": "stock-level",
+    "pluralName": "stock-levels",
+    "displayName": "Stock Level"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "product": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product"
+    },
+    "quantity": {
+      "type": "integer",
+      "required": true
+    },
+    "warehouse": {
+      "type": "string"
+    },
+    "lastRestockDate": {
+      "type": "datetime"
+    },
+    "reorderPoint": {
+      "type": "integer"
+    }
+  }
+}

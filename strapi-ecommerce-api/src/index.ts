@@ -1,20 +1,23 @@
-// import type { Core } from '@strapi/strapi';
+import type { Core } from '@strapi/strapi';
 
 export default {
-  /**
-   * An asynchronous register function that runs before
-   * your application is initialized.
-   *
-   * This gives you an opportunity to extend code.
-   */
-  register(/* { strapi }: { strapi: Core.Strapi } */) {},
+  register({ strapi }: { strapi: Core.Strapi }) {
+    strapi.documents.use(async (context, next) => {
+      const result = await next();
 
-  /**
-   * An asynchronous bootstrap function that runs before
-   * your application gets started.
-   *
-   * This gives you an opportunity to set up your data model,
-   * run jobs, or perform some special logic.
-   */
+      if (
+        context.uid === 'api::stock-level.stock-level' &&
+        context.action === 'update'
+      ) {
+        const { quantity, reorderPoint } = result as any;
+        if (quantity != null && reorderPoint != null && quantity < reorderPoint) {
+          console.log('Low stock alert:', result);
+        }
+      }
+
+      return result;
+    });
+  },
+
   bootstrap(/* { strapi }: { strapi: Core.Strapi } */) {},
 };
